@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Make a Payment</title>
+  <style>
+    body {
+      background: #0c0c0c;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn {
+      padding: 12px 25px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 10px;
+      transition: 0.3s ease;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+    .payment-section {
+      margin-top: 30px;
+      display: none;
+      border: 1px solid #0072ff;
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #1f1f1f;
+      box-shadow: 0 0 15px rgba(0, 198, 255, 0.1);
+    }
+    .address {
+      word-break: break-all;
+      margin: 20px 0;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    .copy-btn {
+      background: #00c6ff;
+      border: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: #0072ff;
+    }
+    .copied {
+      color: #00ffcc;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose Payment Network</h1>
+  <button class="btn" onclick="showPayment('trc')">TRC20</button>
+  <button class="btn" onclick="showPayment('bep')">BEP20</button>
+
+  <!-- TRC Section -->
+  <div id="trc" class="payment-section">
+    <h2>TRC20 Address</h2>
+    <div class="address" id="trcAddress">TX9KjXuG4LU7stZ1hLYXEmfXKbh5Kkxnfd</div>
+    <button class="copy-btn" onclick="copyAddress('trc')">Copy Address</button>
+    <div class="copied" id="trcCopied" style="display: none;">Copied!</div>
+  </div>
+
+  <!-- BEP Section -->
+  <div id="bep" class="payment-section">
+    <h2>BEP20 Address</h2>
+    <div class="address" id="bepAddress">0x0f9a863614287da330c9cce80e50df5c91981669</div>
+    <button class="copy-btn" onclick="copyAddress('bep')">Copy Address</button>
+    <div class="copied" id="bepCopied" style="display: none;">Copied!</div>
+  </div>
+
+  <script>
+    function showPayment(type) {
+      document.getElementById("trc").style.display = "none";
+      document.getElementById("bep").style.display = "none";
+      document.getElementById(type).style.display = "block";
+    }
+
+    function copyAddress(type) {
+      const address = document.getElementById(type + "Address").innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        document.getElementById(type + "Copied").style.display = "block";
+        setTimeout(() => {
+          document.getElementById(type + "Copied").style.display = "none";
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
